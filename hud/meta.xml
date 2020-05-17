@@ -1,0 +1,32 @@
+<meta>
+	<info description="Shader - HUD mask" author="ccw" version="0.0.1" type="script" />
+
+	<script src="c_hud_mask.lua" type="client"/>
+
+	<file src="hud_mask.fx" type="client" />
+	<file src="include/tex_matrix.fx" type="client" />
+	<file src="images/radar.jpg" type="client" />
+	<file src="images/sept_mask.png" type="client" />
+	<file src="images/player.png" type="client" />
+	<file src="images/weapons/0.png" type="client" />
+	<file src="images/weapons/4.png" type="client" />
+	<file src="images/weapons/5.png" type="client" />
+	<file src="images/weapons/6.png" type="client" />
+	<file src="images/weapons/16.png" type="client" />
+	<file src="images/weapons/18.png" type="client" />
+	<file src="images/weapons/22.png" type="client" />
+	<file src="images/weapons/23.png" type="client" />
+	<file src="images/weapons/24.png" type="client" />
+	<file src="images/weapons/25.png" type="client" />
+	<file src="images/weapons/27.png" type="client" />
+	<file src="images/weapons/28.png" type="client" />
+	<file src="images/weapons/29.png" type="client" />
+	<file src="images/weapons/30.png" type="client" />
+	<file src="images/weapons/31.png" type="client" />
+	<file src="images/weapons/33.png" type="client" />
+	<file src="images/weapons/34.png" type="client" />
+	<file src="images/weapons/35.png" type="client" />
+	<file src="images/weapons/40.png" type="client" />
+	<file src="images/weapons/41.png" type="client" />
+	<file src="images/weapons/46.png" type="client" />
+</meta>
