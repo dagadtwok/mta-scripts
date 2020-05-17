@@ -1,0 +1,5 @@
+<meta>
+	<info description="notifications" author="damy" type="script" />
+
+	<script src="client.lua" type="client"/>
+</meta>
