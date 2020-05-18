@@ -4,10 +4,16 @@ markerposZ = 47
 
 weaponshopmarker = createMarker(markerposX, markerposY, markerposZ, "cylinder", 3, 255, 50, 50, 50)
 salebg =  dxCreateTexture("images/sale.png")
+sale2bg =  dxCreateTexture("images/sale2.png")
 weaponsbg =  dxCreateTexture("images/weapons.png")
 vehiclesbg =  dxCreateTexture("images/vehicles.png")
 
-local shopmenu = 0
+local shopmenu = 1
+local atime = 0
+local timer = 0
+local salesbgc = 0
+local salesbgalpha = 255
+local salesFadeIn = false
 
 function dxDrawTextOnElement(TheElement,text,height,distance,R,G,B,alpha,size,font,...)
 	local x, y, z = getElementPosition(TheElement)
@@ -62,7 +68,7 @@ end
 
 addEventHandler( "onClientRender", root,
     function()
-
+			local time = getRealTime()
 			if (shopmenu == 1) then
 				showCursor(true)
 				local saleselectalpha = 0
@@ -78,6 +84,33 @@ addEventHandler( "onClientRender", root,
 				mx = mx * sx
 				my = my * sy
 
+				if atime ~= time.second then
+					timer = timer + 1
+					atime = time.second
+				end
+
+				dxDrawText(timer .. " " .. salesbgc, 50, 50)
+				if timer > 6 then
+					salesFadeIn = false
+					timer = 0
+				end
+
+				if salesFadeIn then
+					if salesbgalpha < 255 then
+						 salesbgalpha = salesbgalpha + 5
+					end
+				else
+					if salesbgalpha > 0 then
+						 salesbgalpha = salesbgalpha - 5
+					 else
+						 if salesbgc ~= 1 then
+	 						salesbgc = salesbgc + 1
+	 					else
+	 						salesbgc = 0
+	 					end
+						 salesFadeIn = true
+					end
+				end
 				if mx > 150 and mx < 150 +sx/2 and my > 150 and my < 150 + 200 then
 						saleselectalpha = 250
 				end
@@ -91,6 +124,7 @@ addEventHandler( "onClientRender", root,
 				dxDrawRectangle(sx, 0, 15, sy)
 				dxDrawRectangle(0, sy, sx, 15)
 
+				--dxDrawRectangle(150, 50, sx - 300, 700, tocolor(0, 0, 0, 100))
 
 				dxDrawRectangle(150, 50, sx - 300, sy * 0.08, tocolor(0, 0, 0, 200))
 
@@ -99,7 +133,11 @@ addEventHandler( "onClientRender", root,
 				dxDrawRectangle(150-3, 150-3, sx/2+6, 200+6, tocolor(250, 250, 250, saleselectalpha))
 				dxDrawRectangle(150, 150, sx/2, 200, tocolor(0, 0, 0, 200))
 				--dxDrawImage(150+1, 150+1, sx/2-2, 200-2, salebg)
-				dxDrawImageSection(150+1, 150+1, sx/2-2, 200-2, 150, 150, sx/2, 200, salebg)
+				if salesbgc == 0 then
+					dxDrawImageSection(150+1, 150+1, sx/2-2, 200-2, 150, 150, sx/2, 200, sale2bg, 0, 0, 0, tocolor(255, 255, 255, salesbgalpha))
+				else
+					dxDrawImageSection(150+1, 150+1, sx/2-2, 200-2, 150, 150, sx/2, 200, salebg, 0, 0, 0, tocolor(255, 255, 255, salesbgalpha))
+				end
 				dxDrawText("On Sale", (150+sx/2) - dxGetTextWidth("On Sale", 1.5, "bankgothic"), 310, _, _, tocolor(250, 250, 250, 255), 1.5, "bankgothic")
 
 				dxDrawRectangle(sx/2 + 155-3, 150-3, sx - sx/2 - 150 - 155+6, 200+6, tocolor(250, 250, 250, weaponsselectalpha))

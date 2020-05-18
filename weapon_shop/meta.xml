@@ -4,6 +4,7 @@
 
 	<script src="client.lua" type="client"/>
 	<file src="images/sale.png" type="client" />
+	<file src="images/sale2.png" type="client" />
 	<file src="images/weapons.png" type="client" />
 	<file src="images/vehicles.png" type="client" />
 
