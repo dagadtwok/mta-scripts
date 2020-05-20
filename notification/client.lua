@@ -44,7 +44,6 @@ function()
 				yPos = yPos - 2
 			end
 
-      dxDrawText(tickStart .. " " .. tickCurr .. " " .. tickStart + string.len(notifyString) *200, 50, 50)
 		--	if timer > string.len(notifyString)/2-string.len(notifyString)/2/2/2 then --really dumb calculation, but idc
     if tickCurr > tickStart + string.len(notifyString) *200 then
 				if notiAlpha2 > 0 then
