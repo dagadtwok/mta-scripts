@@ -94,14 +94,27 @@ addEventHandler( "onClientRender", root,
     function()
       if hideHud == 0 then
 		local weapon = getPedWeapon(getLocalPlayer ( ))
-		if getControlState("aim_weapon") and weapon ~= 0 then
-			dxDrawRectangle(csx-6, csy-1, 14, 4, tocolor(0, 0, 0, 255))
-			dxDrawRectangle(csx-5, csy, 12, 2, tocolor(crosshairR, crosshairG, crosshairB, 255))
-			dxDrawRectangle(csx-1, csy-6, 4, 5, tocolor(0, 0, 0, 255))
-			dxDrawRectangle(csx-1, csy+3, 4, 5, tocolor(0, 0, 0, 255))
-			dxDrawRectangle(csx, csy-5, 2, 12, tocolor(crosshairR, crosshairG, crosshairB, 255))
-		end
+		if getControlState("aim_weapon") then
+      if weapon ~= 0 and weapon ~= 35 and weapon ~= 45 and weapon ~= 1 and weapon ~= 9 then
+			   dxDrawRectangle(csx-6, csy-1, 14, 4, tocolor(0, 0, 0, 255))
+			   dxDrawRectangle(csx-5, csy, 12, 2, tocolor(crosshairR, crosshairG, crosshairB, 255))
+			   dxDrawRectangle(csx-1, csy-6, 4, 5, tocolor(0, 0, 0, 255))
+			   dxDrawRectangle(csx-1, csy+3, 4, 5, tocolor(0, 0, 0, 255))
+			   dxDrawRectangle(csx, csy-5, 2, 12, tocolor(crosshairR, crosshairG, crosshairB, 255))
+      elseif weapon == 35 then
+        dxDrawRectangle(sx/2 - (sx*1.05-sx), sy/2-(sy*1.1-sy), (sx*1.05-sx), 10, tocolor(crosshairR, crosshairG, crosshairB, 255))
+        dxDrawRectangle(sx/2 - (sx*1.05-sx), sy/2-(sy*1.1-sy), 10, (sy*1.05-sy), tocolor(crosshairR, crosshairG, crosshairB, 255))
 
+        dxDrawRectangle(sx/2 - (sx*1.05-sx), sy/2+(sy*1.1-sy), (sx*1.05-sx), 10, tocolor(crosshairR, crosshairG, crosshairB, 255))
+        dxDrawRectangle(sx/2 - (sx*1.05-sx), sy/2+(sy*1.1-sy), 10, -(sy*1.05-sy), tocolor(crosshairR, crosshairG, crosshairB, 255))
+
+        dxDrawRectangle(sx/2 + (sx*1.05-sx), sy/2-(sy*1.1-sy), (sx*1.05-sx), 10, tocolor(crosshairR, crosshairG, crosshairB, 255))
+        dxDrawRectangle(sx/2 + ((sx*1.05-sx)*2), sy/2-(sy*1.1-sy), 10, (sy*1.05-sy), tocolor(crosshairR, crosshairG, crosshairB, 255))
+
+        dxDrawRectangle(sx/2 + ((sx*1.05-sx)*2), sy/2+(sy*1.1-sy)+10, 10, -(sy*1.05-sy)-10, tocolor(crosshairR, crosshairG, crosshairB, 255))
+        dxDrawRectangle(sx/2 + (sx*1.05-sx), sy/2+(sy*1.1-sy), (sx*1.05-sx), 10, tocolor(crosshairR, crosshairG, crosshairB, 255))
+      end
+    end
 		if not bAllValid then return end
 
 		dxSetShaderValue( hudMaskShader, "sMaskTexture", maskTexture2 )
@@ -275,7 +288,7 @@ addEventHandler( "onClientRender", root,
 		else
 			timer2 = 0
 			if ahealth > health then
-				ahealth = ahealth - 5
+				ahealth = ahealth - 1
 			else
 				ahealth = health
 			end
@@ -294,7 +307,7 @@ addEventHandler( "onClientRender", root,
 			hudalphafont = 255
 		end
 
-		if SBX and SBY then
+		if SBX and SBY and health > 0 then
 
 			dxDrawRectangle(SBX + 100, SBY-55, pNameLenght+20, 30,tocolor(0 ,0, 0,hudalpha))
 			dxDrawRectangle(SBX + 100, SBY-58, pNameLenght+20, 3,tocolor(60 ,63, 208,hudalpha))

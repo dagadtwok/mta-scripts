@@ -5,7 +5,12 @@
 	<script src="client.lua" type="client"/>
 	<file src="images/sale.png" type="client" />
 	<file src="images/sale2.png" type="client" />
+	<file src="images/sale3.png" type="client" />
 	<file src="images/weapons.png" type="client" />
 	<file src="images/vehicles.png" type="client" />
+	<file src="images/salebg.png" type="client" />
+	<map src="mapae.map" dimension="0"></map>
+	<script src="mapEditorScriptingExtension_s.lua" type="server"></script>
+	<script src="mapEditorScriptingExtension_c.lua" type="client" validate="false"></script>
 
 </meta>
