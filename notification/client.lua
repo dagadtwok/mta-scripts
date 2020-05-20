@@ -1,10 +1,13 @@
-local timer = 0
+
 local notifyString = "test notification"
 local notifytype = "0"
 local sx, sy = guiGetScreenSize()
 local yPos = sy + 50
 local notiAlpha = 255
 local notiAlpha2 = 200
+
+local tickStart = 0
+local tickCurr = 0
 
 function dxDrawRoundedRectangle(x, y, rx, ry, color, radius)
     rx = rx - radius * 2
@@ -29,14 +32,11 @@ local atime = 0
 addEventHandler( "onClientRender", root,
 
 function()
-		if timer < string.len(notifyString)/2 then
+		if tickCurr < tickStart + (string.len(notifyString) * 500) then
+
+      tickCurr = getTickCount()
 
 			local time = getRealTime()
-			if time.second ~= atime then
-				atime = time.second
-				timer = timer + 1
-
-			end
 
 			if yPos > sy-30 then
 				yPos = yPos - 5
@@ -44,7 +44,9 @@ function()
 				yPos = yPos - 2
 			end
 
-			if timer > string.len(notifyString)/2-string.len(notifyString)/2/2/2 then --really dumb calculation, but idc
+      dxDrawText(tickStart .. " " .. tickCurr .. " " .. tickStart + string.len(notifyString) *200, 50, 50)
+		--	if timer > string.len(notifyString)/2-string.len(notifyString)/2/2/2 then --really dumb calculation, but idc
+    if tickCurr > tickStart + string.len(notifyString) *200 then
 				if notiAlpha2 > 0 then
 					notiAlpha2 = notiAlpha2 - 5
 				end
@@ -73,9 +75,9 @@ function showNofity(type, text)
 	notifytype = type
 	notifyString = text
 	yPos = sy + 50
-	timer = 0
 	notiAlpha = 255
 	notiAlpha2 = 200
+  tickStart = getTickCount()
 end
 
 addEvent("sendNotification", true)
