@@ -5,10 +5,11 @@ local messages = {}
 local alpha = {}
 local timer = {}
 local atime = {}
+local sx, sy = guiGetScreenSize()
 addEventHandler("onClientRender", root,
   function()
     local time = getRealTime()
-    local sx, sy = guiGetScreenSize()
+
 
     for i = 1 , table.getn(messages) do
 
