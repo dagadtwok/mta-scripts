@@ -1,0 +1,9 @@
+<meta>
+	<info description="core" author="okosember" type="script" />
+
+
+	<script src="client.lua" type="client"/>
+	<script src="server.lua" type="server"/>
+	<script src="shared.lua" type="shared"/>
+
+</meta>

@@ -10,7 +10,7 @@ weaponsbg =  dxCreateTexture("images/weapons.png")
 vehiclesbg =  dxCreateTexture("images/vehicles.png")
 salemenubg =  dxCreateTexture("images/salebg.png")
 
-local shopmenu = 1
+local shopmenu = 0
 local atime = 0
 local timer = 0
 local salesbgc = 0
