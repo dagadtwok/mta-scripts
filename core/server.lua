@@ -1,8 +1,11 @@
 
 addEventHandler("onPlayerWasted", root,
       function()
-        fadeCamera(root, false, 2, 255, 255, 255)
+        fadeCamera(source, false, 2, 5, 5, 5)
         setTimer(respawnPlayer, 5000, 1, source)
+        triggerClientEvent(source, "hideHud", source)
+        triggerClientEvent(source, "sendNotification", source, "2", "‎‎‎‎‎Wasted‎‎‎‎‎")
+        triggerClientEvent(root, "sendSideNotification", root, getPlayerName(source) .. " died")
       end
 )
 
@@ -20,27 +23,27 @@ addEventHandler("onPlayerJoin", root,
         setElementPosition(source, -2403.00000, -598.00000, 134.64844)
         setCameraTarget(source)
         fadeCamera(root, true, 1)
-        triggerClientEvent(root, "totalPlayer", root, getPlayerCount())
-        setPlayerNameTagShowing(root, false)
+        triggerClientEvent(root, "sendSideNotification", root, getPlayerName(source) .. " connected")
       end
 )
 
 
 addEventHandler("onPlayerSpawn", root,
       function()
-        triggerClientEvent(root, "totalPlayer", root, getPlayerCount())
+        --triggerClientEvent(root, "sendSideNotification", root, getPlayerName(source) .. " spawned.")
+        triggerClientEvent(source, "showHud", source)
       end
 )
 addEventHandler("onPlayerQuit", root,
       function()
-        triggerClientEvent(root, "totalPlayer", root, getPlayerCount())
+        triggerClientEvent(root, "sendSideNotification", root, getPlayerName(source) .. " left the game")
       end
 )
 
 
 addCommandHandler("kms",
-  function()
-    setElementHealth(root, 0)
+  function(source)
+    setElementHealth(source, 0)
   end
 )
 
@@ -50,13 +53,17 @@ addCommandHandler("getpos",
     outputChatBox(x .. " " .. y .. " " .. z)
   end
 )
+addCommandHandler("gotoshop",
+  function(source)
+    setElementPosition(source, -2193.5546875, 640.5888671875, 49.442939758301)
+  end
+)
 
 addCommandHandler("joinemu",
   function(source)
       spawnPlayer(source, -2403.00000, -598.00000, 134.64844)
       setElementPosition(source, -2403.00000, -598.00000, 134.64844)
       setCameraTarget(source)
-      fadeCamera(root, true, 1)
-      triggerClientEvent(root, "totalPlayer", root, getPlayerCount())
+      fadeCamera(source, true, 1)
     end
 )

@@ -36,8 +36,9 @@ addEventHandler("onClientRender", root,
       end
 
       if messages[i] ~= nil then
-        dxDrawText(messages[i], sx-5, sy/2+(15*i), _, _, tocolor(250, 250, 250, alpha[i]), 1, "default-bold", "right")
-        dxDrawText(timer[i], sx-300, sy/2+(15*i), _, _, tocolor(250, 250, 250, alpha[i]), 1, "default-bold", "right")
+        dxDrawText(messages[i], sx-4, sy/2+(15*i)+1, _, _, tocolor(0, 0, 0, alpha[i]), 1, "default-bold", "right")
+        dxDrawText(messages[i], sx-5, sy/2+(15*i), _, _, tocolor(250, 250, 250, alpha[i]), 1, "default-bold", "right")        
+        --dxDrawText(timer[i], sx-300, sy/2+(15*i), _, _, tocolor(250, 250, 250, alpha[i]), 1, "default-bold", "right")
       end
       if atime[i] == time.second then
   		else
@@ -55,9 +56,16 @@ addEventHandler("onClientRender", root,
 )
 
 
-addCommandHandler("addsidenoti",
-function(root, mes)
+addEvent("sendSideNotification", true)
+addEventHandler("sendSideNotification", root,
+function(mes)
   mes = string.gsub(mes, "%_", " ")
-table.insert(messages, table.getn(messages)+1, mes)
-end
-, false, false)
+  table.insert(messages, table.getn(messages)+1, mes)
+end)
+
+addCommandHandler("addsidenoti",
+function(root, ...)
+  --mes = string.gsub(mes, "%_", " ")
+  mes = table.concat({...}, " ")
+  table.insert(messages, table.getn(messages)+1, mes)
+end, false, false)
