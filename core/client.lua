@@ -1,7 +1,7 @@
 local sx, sy = guiGetScreenSize()
 local height = 15
 
-function dxDrawTextOnElement(TheElement,text,height,distance,R,G,B,alpha,size,font,...)
+function drawNameTag(TheElement,text,height,distance,R,G,B,alpha,size,font,...)
 	local x, y, z = getElementPosition(TheElement)
 	local x2, y2, z2 = getCameraMatrix()
 	local distance = distance or 20
@@ -16,6 +16,7 @@ function dxDrawTextOnElement(TheElement,text,height,distance,R,G,B,alpha,size,fo
 			local distanceBetweenPoints = getDistanceBetweenPoints3D(x, y, z, x2, y2, z2)
 			if(distanceBetweenPoints < distance) then
         local tL, tH = dxGetTextSize(text, textLength, (size or 1)-(distanceBetweenPoints / distance), (size or 1)-(distanceBetweenPoints / distance), font, false)
+        dxDrawText(tL .. " " .. tH, SBX+45, SBY+(tH*2), SBX, SBY, tocolor(R or 255, G or 255, B or 255, alpha or 255), (size or 1)-(distanceBetweenPoints / distance), font or "arial", "left", "center")
         dxDrawRectangle(SBX+40, SBY-(tH/2), 3, tH+2, tocolor(60 ,63, 208, 150))
         dxDrawRectangle(SBX+43, SBY-(tH/2), tL+7, tH+2, tocolor(0 ,0, 0, 120))
         --dxDrawText(text, SBX+46, SBY+3, SBX, SBY, tocolor(R or 255, G or 255, B or 255, alpha or 255), (size or 1)-(distanceBetweenPoints / distance), font or "arial", "left", "center")
@@ -24,6 +25,7 @@ function dxDrawTextOnElement(TheElement,text,height,distance,R,G,B,alpha,size,fo
 		end
 	end
 end
+
 
 addEventHandler("onClientRender", root,
       function()
@@ -36,7 +38,7 @@ addEventHandler("onClientRender", root,
         for i = 2, #players do
 
           setPlayerNametagShowing(players[i], false)
-          dxDrawTextOnElement(players[i], getPlayerName(players[i]), 1, 60, 230, 230, 230, 255, 1.5, "arial")
+          drawNameTag(players[i], getPlayerName(players[i]), 1, 60, 230, 230, 230, 255, 1.5, "arial")
         end
 
         if playerCount < 2 then

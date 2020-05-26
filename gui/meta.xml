@@ -1,0 +1,7 @@
+<meta>
+	<info description="gui-test" author="okosember" type="script" />
+
+
+	<script src="framework.lua" type="client"/>
+
+</meta>
