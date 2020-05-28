@@ -1,11 +1,15 @@
 
 addEventHandler("onPlayerWasted", root,
-      function()
+      function(ammo, attacker, weapon, bodypart)
         fadeCamera(source, false, 2, 5, 5, 5)
         setTimer(respawnPlayer, 5000, 1, source)
         triggerClientEvent(source, "hideHud", source)
         triggerClientEvent(source, "sendNotification", source, "2", "‎‎‎‎‎Wasted‎‎‎‎‎")
+        if getElementType( attacker ) == "player" then
+          triggerClientEvent(root, "sendSideNotification", root, getPlayerName(source) .. " killed by " .. getPlayerName(attacker))
+        else
         triggerClientEvent(root, "sendSideNotification", root, getPlayerName(source) .. " died")
+        end
       end
 )
 
@@ -15,15 +19,13 @@ function respawnPlayer(player)
 end
 
 -- testing
-
 addEventHandler("onPlayerJoin", root,
       function()
-        playerCount = getPlayerCount()
-        spawnPlayer(source, -2403.00000, -598.00000, 134.64844)
-        setElementPosition(source, -2403.00000, -598.00000, 134.64844)
-        setCameraTarget(source)
-        fadeCamera(root, true, 1)
-        triggerClientEvent(root, "sendSideNotification", root, getPlayerName(source) .. " connected")
+            spawnPlayer(source, -2403.00000, -598.00000, 134.64844)
+            setElementPosition(source, -2403.00000, -598.00000, 134.64844)
+            setCameraTarget(source)
+            fadeCamera(root, true, 1)
+            triggerClientEvent(root, "sendSideNotification", root, getPlayerName(source) .. " connected")
       end
 )
 
@@ -35,11 +37,16 @@ addEventHandler("onPlayerSpawn", root,
       end
 )
 addEventHandler("onPlayerQuit", root,
-      function()
-        triggerClientEvent(root, "sendSideNotification", root, getPlayerName(source) .. " left the game")
+      function(type)
+        triggerClientEvent(root, "sendSideNotification", root, getPlayerName(source) .. " left the game (" .. type .. ")")
       end
 )
 
+addEventHandler("onPlayerChangeNick", root,
+function(old, new)
+    triggerClientEvent(root, "sendSideNotification", root, old .. " now known as " .. new)
+end
+)
 
 addCommandHandler("kms",
   function(source)
@@ -61,9 +68,10 @@ addCommandHandler("gotoshop",
 
 addCommandHandler("joinemu",
   function(source)
-      spawnPlayer(source, -2403.00000, -598.00000, 134.64844)
-      setElementPosition(source, -2403.00000, -598.00000, 134.64844)
-      setCameraTarget(source)
-      fadeCamera(source, true, 1)
+        spawnPlayer(source, -2403.00000, -598.00000, 134.64844)
+        setElementPosition(source, -2403.00000, -598.00000, 134.64844)
+        setCameraTarget(source)
+        fadeCamera(root, true, 1)
+        triggerClientEvent(root, "sendSideNotification", root, getPlayerName(source) .. " connected")
     end
 )
