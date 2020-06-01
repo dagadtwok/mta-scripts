@@ -2,6 +2,7 @@
 	<info description="Shader - HUD mask" author="ccw" version="0.0.1" type="script" />
 
 	<script src="c_hud_mask.lua" type="client"/>
+	<script src="crosshair.lua" type="client"/>
 
 	<file src="hud_mask.fx" type="client" />
 	<file src="include/tex_matrix.fx" type="client" />
